@@ -1,0 +1,50 @@
+;
+;	File 'topol.top' was generated
+;	By user: malinda (504)
+;	On host: registered-ip-10-196-114-37.lifesci.nor.ou.edu
+;	At date: Fri Apr 12 14:24:45 2024
+;
+;	This is a standalone topology file
+;
+;	Created by:
+;	                    :-) GROMACS - gmx pdb2gmx, 2022.4 (-:
+;	
+;	Executable:   /usr/local/gromacs/bin/gmx
+;	Data prefix:  /usr/local/gromacs
+;	Working dir:  /Users/malinda/Desktop/malinda/project/amyloid_beta_monomer/docking/md/rep3_fi10
+;	Command line:
+;	  gmx pdb2gmx -f rep3_fi10_h.pdb -o rep3.gro -water tip3p -ter -ignh
+;	Force field was read from the standard GROMACS share directory.
+;
+
+; Include forcefield parameters
+#include "charmm36_ljpme-jul2022.ff/forcefield.itp"
+
+; Include chain topologies
+#include "topol_Protein_chain_A.itp"
+#include "topol_Protein_chain_B.itp"
+
+; Include water topology
+#include "charmm36_ljpme-jul2022.ff/tip3p.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+; Include topology for ions
+#include "charmm36_ljpme-jul2022.ff/ions.itp"
+
+[ system ]
+; Name
+Protein in water
+
+[ molecules ]
+; Compound        #mols
+Protein_chain_A     1
+Protein_chain_B     1
+SOL         10265
+NA               31
+CL               29
